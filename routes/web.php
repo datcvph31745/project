@@ -46,6 +46,23 @@ Route::get('/', function () {
     Route::get('/cart', function () {
         return view('frontend.cart');
     })->name('cart');
+
+    Route::get('/sproduct', function () {
+        return view('frontend.sproduct');
+    })->name('sproduct');
+    
+
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
+
+    Route::get('/register', function () {
+        return view('auth.register');
+    })->name('register');
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     
 
 
