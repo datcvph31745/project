@@ -29,7 +29,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form action="{{ route('login.action') }}" method="POST" class="user">
+                  {{-- <form action="{{ route('login.action') }}" method="POST" class="user"> --}}
                     @csrf
                                         @if ($errors->any())
                                         <div class="alert alert-danger">
