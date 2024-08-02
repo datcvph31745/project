@@ -28,20 +28,5 @@
     </div>
   </div>
 
-  <script>
-    $(function(){
-      var table = $('#dataTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{route('users')}}",
-        columns: [
-          {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-          {data: 'name', name: 'name'},
-          {data: 'email', name: 'email'},
-          {data: 'level', name: 'level'},
-          {data: 'action', name: 'action'},
-        ]
-      });
-    })
-  </script>
+
 @endsection
