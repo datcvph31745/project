@@ -37,6 +37,7 @@
                     <img src="{{Storage::url($item->image)}}" style="width: 100px">
                 @endif
             </td>
+
             <td>{{$item->listCate->name}}</td>
             <td>
                 <form action="{{route('products.destroy', ['id'=>$item->id])}}" method="POST">
