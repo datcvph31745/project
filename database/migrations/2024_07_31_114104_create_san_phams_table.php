@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('san_phams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('gia');
+            $table->decimal('gia', 10, 2); 
             $table->integer('so_luong');
             $table->string('image');
             $table->unsignedBigInteger('id_danh_muc');
