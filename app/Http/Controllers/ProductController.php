@@ -3,86 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\products;
-use App\Models\category;
-use DataTables;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        if ($request->ajax()) {
-            $products = products::latest()->get();
-            return DataTables::of($products)
-                ->addIndexColumn()
-                ->addColumn('action', function ($product) {
-                    $btn = '
-                        <a href="' . route('products.edit', $product->id) . '" 
-                        class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        
-                        <a href="' . route('products.edit', $product->id) . '" 
-                        class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                        
-                        <a href="' . route('products.delete', $product->id) . '" 
-                        class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    ';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-
         return view('products.index');
     }
 
-    public function add()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $category = category::get();
-
-        return view('products.form', ['category' => $category]);
+        //
     }
 
-    public function save(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        $data = [
-            'item_code' => $request->item_code,
-            'productname' => $request->productname,
-            'category' => $request->id_category,
-            'price' => $request->price
-        ];
-
-        products::create($data);
-
-        return redirect()->route('products');
+        //
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $product = products::find($id);
-        $category = category::get();
-
-        return view('products.form', ['product' => $product, 'category' => $category]);
+        //
     }
 
-    public function update($id, Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $data = [
-            'item_code' => $request->item_code,
-            'productname' => $request->productname,
-            'category' => $request->id_category,
-            'price' => $request->price
-        ];
-
-        products::find($id)->update($data);
-
-        return redirect()->route('products');
+        //
     }
 
-    public function delete($id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        products::find($id)->delete();
+        //
+    }
 
-        return redirect()->route('products');
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
