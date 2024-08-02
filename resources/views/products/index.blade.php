@@ -8,9 +8,9 @@
       <h6 class="m-0 font-weight-bold text-primary">Data product</h6>
     </div>
     <div class="card-body">
-            @if (auth()->user()->level == 'Admin')
+            {{-- @if (auth()->user()->level == 'Admin')
       <a href="{{ route('products.add') }}" class="btn btn-primary mb-3">Add product</a>
-            @endif
+            @endif --}}
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
@@ -33,20 +33,20 @@
   </div>
 
   <script>
-    $(function(){
-      var table = $('#dataTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{route('products')}}",
-        columns: [
-          {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-          {data: 'item_code', name: 'item_code'},
-          {data: 'productname', name: 'productname'},
-          {data: 'category', name: 'category'},
-          {data: 'price', name: 'price'},
-          {data: 'action', name: 'action'},
-        ]
-      });
-    })
+    // $(function(){
+    //   var table = $('#dataTable').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "{{route('products')}}",
+    //     columns: [
+    //       {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    //       {data: 'item_code', name: 'item_code'},
+    //       {data: 'productname', name: 'productname'},
+    //       {data: 'category', name: 'category'},
+    //       {data: 'price', name: 'price'},
+    //       {data: 'action', name: 'action'},
+    //     ]
+    //   });
+    // })
   </script>
 @endsection
