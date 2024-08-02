@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('gia');
-            $table->string('image')->nullable();
-            $table->text('mo_ta');
-            $table->unsignedInteger('luot_xem');
+            $table->integer('so_luong');
+            $table->string('image');
             $table->unsignedBigInteger('id_danh_muc');
             $table->timestamps();
         });
