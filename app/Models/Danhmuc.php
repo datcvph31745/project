@@ -16,7 +16,7 @@ class Danhmuc extends Model
         'update_at'
     ];
     public function loadAllDataCategory(){
-        $query = Category::query()->get();
+        $query = Danhmuc::query()->get();
         return $query;
     }
 }
