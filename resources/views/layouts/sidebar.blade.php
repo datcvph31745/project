@@ -77,7 +77,7 @@
                 </a>
                 <div class="collapse" id="collapsesanpham" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="layout-static.html">Tất cả sản phẩm</a>
+                        <a class="nav-link" href="{{route('products.index')}}">Tất cả sản phẩm</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Thêm sản phẩm</a>
                     </nav>
                 </div>
