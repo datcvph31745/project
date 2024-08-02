@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Product extends Model
 {
@@ -22,7 +24,7 @@ class Product extends Model
         'updated_at'
     ];
     public function listCate(){
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Danhmuc::class, 'id_danh_muc');
     }
     public function loadAllDataProductWithPager(){
         // ORM
