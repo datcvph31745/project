@@ -38,14 +38,14 @@
     <input type="text"
            class="form-control"
            id="exampleFormControlInput1"
-           name="price" value="{{old('price')}}">
+           name="gia" value="{{old('gia')}}">
 </div>
 <div class="mb-3">
     <label class="form-label">Số lượng</label>
     <input type="text"
            class="form-control"
            id="exampleFormControlInput1"
-           name="quantity" value="{{old('quantity')}}">
+           name="so_luong" value="{{old('so_luong')}}">
 </div>
 <div class="mb-3">
     <label class="form-label">Ảnh</label>
@@ -56,9 +56,9 @@
 </div>
 <div class="mb-3">
     <label class="form-label">Loại</label>
-    <select class="form-select" name="category_id" aria-label="Default select example">
+    <select class="form-select" name="id_danh_muc" aria-label="Default select example">
         @foreach($listCate as $item)
-        <option value="{{$item->id}}" @if($item->id == old('category_id')) selected @endif>{{$item->name}}</option>
+        <option value="{{$item->id}}" @if($item->id == old('id_danh_muc')) selected @endif>{{$item->name}}</option>
         @endforeach
     </select>
 </div>
