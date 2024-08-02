@@ -3,50 +3,55 @@
 @section('title', 'Data product')
  
 @section('contents')
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Data product</h6>
-    </div>
-    <div class="card-body">
-            {{-- @if (auth()->user()->level == 'Admin')
-      <a href="{{ route('products.add') }}" class="btn btn-primary mb-3">Add product</a>
-            @endif --}}
-      <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>code product</th>
-              <th>name product</th>
-              <th>Category</th>
-              <th>Price</th>                            
-              <th>Action</th>
-                            
-            </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    @if(session('success'))
+        {{session('success')}}
+    @endif
+    @if(session('error'))
+        {{session('error')}}
+    @endif
+    <a href="{{route('products.create')}}"
+       class="btn btn-primary" style="width: 13%">Thêm mới </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Loại</th>
+            <th scope="col">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($listPro as $item)
+        <tr>
+            <td>{{$item->id}}</td>
+            <td>{{$item->name}}</td>
+            <td>{{$item->gia}}</td>
+            <td>{{$item->so_luong}}</td>
+            <td>
+                @if(!isset($item->image))
+                    Không có ảnh
+                @else
+                    <img src="{{Storage::url($item->image)}}" style="width: 100px">
+                @endif
+            </td>
+            <td>{{$item->listCate->name}}</td>
+            <td>
+                <form action="{{route('products.destroy', ['id'=>$item->id])}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa???')" class="btn btn-danger">Xóa</button>
+                </form>
+                <a class="btn btn-warning" href="{{route('products.edit', ['id'=> $item->id])}}">Sửa</a>
 
-  <script>
-    // $(function(){
-    //   var table = $('#dataTable').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     ajax: "{{route('products')}}",
-    //     columns: [
-    //       {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-    //       {data: 'item_code', name: 'item_code'},
-    //       {data: 'productname', name: 'productname'},
-    //       {data: 'category', name: 'category'},
-    //       {data: 'price', name: 'price'},
-    //       {data: 'action', name: 'action'},
-    //     ]
-    //   });
-    // })
-  </script>
+            </td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    {{$listPro->links()}}
+
+
 @endsection
