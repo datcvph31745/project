@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreProductRequest;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Danhmuc;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -14,9 +16,6 @@ class ProductController extends Controller
         $this->view = [];
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $objPro = new Product();
@@ -24,42 +23,36 @@ class ProductController extends Controller
         return view('products.index', $this->view);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
-//         $objCate = new Category();
-//         $this->view['listCate'] = $objCate->loadAllDataCategory();
-// //        dd($this->view['listCate']);
-//         return view('product.create', $this->view);
+        $objCate = new Danhmuc();
+        $this->view['listCate'] = $objCate->loadAllDataCategory();
+        return view('products.create', $this->view);
     }
 
     /**
-     * Store a newly created resource in storage.
      */
     // pt upload file
     private function uploadFile($file){
-    //     $fileName = time()."_".$file->getClientOriginalName();
-    //     return $file->storeAs('image_products', $fileName, 'public');
+        $fileName = time()."_".$file->getClientOriginalName();
+        return $file->storeAs('image_products', $fileName, 'public');
     }
     public function store(StoreProductRequest $request)
     {
 
-        // // loại bỏ trường ảnh
-        // $data = $request->except('image');
-        // // Kiểm xem anh đã được upload thành công
-        // if($request->hasFile('image') && $request->file('image')->isValid()){
-        //     $data['image'] = $this->uploadFile($request->file('image'));
-        // }
-        // $objPro = new Product();
-        // $res = $objPro->insertDataProduct($data);
-        // if($res){
-        //     return redirect()->back()->with('success', 'Sản phẩm thêm mới thành công!');
-        // }else{
-        //     return redirect()->back()->with('error', 'Sản phẩm thêm mới không thành công!');
-        // }
+        // loại bỏ trường ảnh
+        $data = $request->except('image');
+        // Kiểm xem anh đã được upload thành công
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $data['image'] = $this->uploadFile($request->file('image'));
+        }
+        $objPro = new Product();
+        $res = $objPro->insertDataProduct($data);
+        if($res){
+            return redirect()->back()->with('success', 'Sản phẩm thêm mới thành công!');
+        }else{
+            return redirect()->back()->with('error', 'Sản phẩm thêm mới không thành công!');
+        }
     }
 
     /**
