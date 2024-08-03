@@ -54,9 +54,9 @@ Route::get('/', function () {
     })->name('sproduct');
     
 
-    // Route::get('/login', function () {
-    //     return view('auth.login');
-    // })->name('login');
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
 
     Route::get('/register', function () {
         return view('auth.register');
@@ -74,8 +74,8 @@ Route::get('/', function () {
 //         Route::get('/register', 'register')->name('register');
 //         Route::post('/register', 'postRegister')->name('postRegister');
 //     });
-Route::get('login', [UserController::class, 'login'])
-    ->name('login');
+// Route::get('login', [UserController::class, 'login'])
+//     ->name('login');
 // Route::post('login', [UserController::class, 'postLogin'])
 //     ->name('postLogin');
 // Route::post('logout', [UserController::class, 'logout'])
