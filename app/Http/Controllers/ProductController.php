@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\StoreProductRequest;
 
 use Illuminate\Http\Request;
@@ -26,26 +27,26 @@ class ProductController extends Controller
     public function create()
     {
         $objCate = new Danhmuc();
-        $this->view['listCate'] = $objCate->loadAllDataCategory();
+        $this->view['listCate'] = $objCate->loadAllDataDanhmucWithPager(); // Sửa đổi tại đây
         return view('products.create', $this->view);
     }
 
-
-    private function uploadFile($file){
-        $fileName = time()."_".$file->getClientOriginalName();
+    private function uploadFile($file)
+    {
+        $fileName = time() . "_" . $file->getClientOriginalName();
         return $file->storeAs('image_products', $fileName, 'public');
     }
     public function store(StoreProductRequest $request)
     {
         $data = $request->except('image');
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $data['image'] = $this->uploadFile($request->file('image'));
         }
         $objPro = new Product();
         $res = $objPro->insertDataProduct($data);
-        if($res){
+        if ($res) {
             return redirect()->back()->with('success', 'Sản phẩm thêm mới thành công!');
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Sản phẩm thêm mới không thành công!');
         }
     }
@@ -57,41 +58,39 @@ class ProductController extends Controller
 
     public function edit(int $id)
     {
-        
         $objCate = new Danhmuc();
-        $this->view['listCate'] = $objCate->loadAllDataCategory();
+        $this->view['listCate'] = $objCate->loadAllDataDanhmucWithPager(); // Sửa đổi tại đây
         $objPro = new Product();
         $this->view['listPro'] = $objPro->loadIdDataProduct($id);
         return view('products.edit', $this->view);
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, int $id)
     {
-        
+
         $objPro = new Product();
         $checkId = $objPro->loadIdDataProduct($id);
         $imageOld = $checkId->image;
-        if($checkId){
+        if ($checkId) {
             $data = $request->except('image');
-            if($request->hasFile('image') && $request->file('image')->isValid()){
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $data['image'] = $this->uploadFile($request->file('image'));
                 $flag = true;
-            }else{
+            } else {
                 $data['image'] = $imageOld;
             }
             $res = $objPro->upadateDataProduct($data, $id);
-            if($res){
-                    if(isset($imageOld) && Storage::disk('public')->exists($imageOld)){
-                       Storage::disk('public')->delete($imageOld);
-                    }
+            if ($res) {
+                if (isset($imageOld) && Storage::disk('public')->exists($imageOld)) {
+                    Storage::disk('public')->delete($imageOld);
+                }
                 return redirect()->back()->with('success', 'Sản phẩm chỉnh sửa thành công!');
-            }else{
+            } else {
                 return redirect()->back()->with('error', 'Sản phẩm chỉnh sửa không thành công!');
             }
-        }else{
+        } else {
             return redirect()->back()->with('error', 'ID không chính xác!');
         }
     }
@@ -104,14 +103,14 @@ class ProductController extends Controller
 
         $objPro = new Product();
         $idCheck = $objPro->loadIdDataProduct($id);
-        if($idCheck){
+        if ($idCheck) {
             $res = $objPro->deleteDataProduct($id);
-            if($res){
+            if ($res) {
                 return redirect()->back()->with('success', 'Sản phẩm xóa thành công!');
-            }else{
+            } else {
                 return redirect()->back()->with('error', 'Sản phẩm xóa không thành công!');
             }
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại!');
         }
     }

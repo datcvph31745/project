@@ -7,8 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
-
-
+use App\Http\Controllers\DanhMucController; // Đảm bảo thêm controller này
 
 /*
 |--------------------------------------------------------------------------
@@ -22,67 +21,67 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', function () {
-    
-   
     return view('frontend.index');
-    })->
-    
-    name('home');
+})->name('home');
 
-    Route::get('/shop', function () {
-        return view('frontend.shop');
-    })->name('shop');
-    
-    Route::get('/blog', function () {
-        return view('frontend.blog');
-    })->name('blog');
-    
-    Route::get('/about', function () {
-        return view('frontend.about');
-    })->name('about');
-    
-    Route::get('/contact', function () {
-        return view('frontend.contact');
-    })->name('contact');
-    
-    Route::get('/cart', function () {
-        return view('frontend.cart');
-    })->name('cart');
+Route::get('/shop', function () {
+    return view('frontend.shop');
+})->name('shop');
 
-    Route::get('/sproduct', function () {
-        return view('frontend.sproduct');
-    })->name('sproduct');
-    
+Route::get('/blog', function () {
+    return view('frontend.blog');
+})->name('blog');
 
-    Route::get('/login', function () {
-        return view('auth.login');
-    })->name('login');
+Route::get('/about', function () {
+    return view('frontend.about');
+})->name('about');
 
-    Route::get('/register', function () {
-        return view('auth.register');
-    })->name('register');
+Route::get('/contact', function () {
+    return view('frontend.contact');
+})->name('contact');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/cart', function () {
+    return view('frontend.cart');
+})->name('cart');
 
+Route::get('/sproduct', function () {
+    return view('frontend.sproduct');
+})->name('sproduct');
 
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+// Routes for ProductController
 Route::controller(ProductController::class)
     ->name('products.')
     ->prefix('products/')
-    ->group(function(){
+    ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')
-        ->name('edit');
-        Route::put('/{id}/update', 'update')
-        ->name('update');
-        Route::delete('/{id}/destroy', 'destroy')
-        ->name('destroy');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}/update', 'update')->name('update');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+    });
 
-});    
-
-
-
+// Routes for DanhMucController (formerly ProductController)
+Route::controller(DanhMucController::class) // Sửa thành DanhMucController
+    ->name('danhmucs.')
+    ->prefix('danhmucs/')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}/update', 'update')->name('update');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+    });

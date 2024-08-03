@@ -51,48 +51,38 @@
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Addons</div>
-                {{-- @if (auth()->user()->level == 'Admin')
-                <a class="nav-link" href={{ route('category') }}>
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Category
-                </a>
-                @endif --}}
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsedanhmuc" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsedanhmuc" aria-expanded="false" aria-controls="collapsedanhmuc">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Danh Mục
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsedanhmuc" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="layout-static.html">Tất cả danh mục</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Thêm danh mục</a>
+                        <a class="nav-link" href="{{ route('danhmucs.index') }}">Tất cả danh mục</a>
+                        <a class="nav-link" href="{{ route('danhmucs.create') }}">Thêm danh mục</a>
                     </nav>
                 </div>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsesanpham" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsesanpham" aria-expanded="false" aria-controls="collapsesanpham">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Sản Phẩm
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsesanpham" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{route('products.index')}}">Tất cả sản phẩm</a>
-                        <a class="nav-link" href="{{route('products.create')}}">Thêm sản phẩm</a>
+                        <a class="nav-link" href="{{ route('products.index') }}">Tất cả sản phẩm</a>
+                        <a class="nav-link" href="{{ route('products.create') }}">Thêm sản phẩm</a>
                     </nav>
                 </div>
 
-
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsesanpham" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsehoadon" aria-expanded="false" aria-controls="collapsehoadon">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Hóa đơn
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
 
-
-
-
+            </div>
         </div>
-
     </nav>
 </div>
