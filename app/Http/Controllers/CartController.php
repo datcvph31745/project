@@ -64,7 +64,11 @@ class CartController extends Controller
 
     }
 
-    public function updateCart(){
+    public function updateCart( Request $request){
+        $cartNew = $request->input('cart',[]);
+        session()->put('cart', $cartNew);
+        return redirect()->back();
+
 
     }
 }
