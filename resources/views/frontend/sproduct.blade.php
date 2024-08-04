@@ -9,12 +9,12 @@
   
       <section id="prodetails" class="section-p1">
         <div class="single-product-image">
-          <img src="img/products/f1.jpg" alt="" width="100%" id="mainImg" />
+          <img src="{{ Storage::url($sanPham->image) }}" alt="" width="100%" id="mainImg" />
   
           <div class="small-img-group">
             <div class="small-img-col">
               <img
-                src="img/products/f1.jpg"
+                src="{{ asset('img/products/f1.jpg') }}"
                 class="small-img"
                 width="100%"
                 alt=""
@@ -22,7 +22,7 @@
             </div>
             <div class="small-img-col">
               <img
-                src="img/products/f3.jpg"
+                src="{{ asset('img/products/f3.jpg') }}"
                 class="small-img"
                 width="100%"
                 alt=""
@@ -30,7 +30,7 @@
             </div>
             <div class="small-img-col">
               <img
-                src="img/products/f4.jpg"
+                src="{{ asset('img/products/f4.jpg') }}"
                 class="small-img"
                 width="100%"
                 alt=""
@@ -38,7 +38,7 @@
             </div>
             <div class="small-img-col">
               <img
-                src="img/products/f2.jpg"
+                src="{{ asset('img/products/f2.jpg') }}"
                 class="small-img"
                 width="100%"
                 alt=""
@@ -49,8 +49,8 @@
   
         <div class="single-product-details">
           <h6>Home / T-Shirt</h6>
-          <h4>Áo sơ mi nam</h4>
-          <h2>580.000 VNĐ</h2>
+          <h4>{{$sanPham->name}}</h4>
+          <h2>{{number_format($sanPham->gia,0,'','.')}}</h2>
           <select name="" id="">
             <option value="">Select Size</option>
             <option value="">XXL</option>
@@ -58,27 +58,20 @@
             <option value="">Medium</option>
             <option value="">Small</option>
           </select>
-          <input type="number" value="1" />
-          <button>Thêm vào giỏ hàng</button>
-          <h4>Thông tin sản phẩm</h4>
+
+          <form action="{{route('cart.add')}}" method="post">
+            @csrf
+            <div class="pro-qty">
+              <input type="number" value="1" name="quantity" min="1" id="quantyityInput"  />
+              <input type="hidden" name="product_id" value="{{$sanPham->id}}">
+              <button type="submit">Thêm vào giỏ hàng</button>
+  
+            </div>
+          </form>
+
+          <h4>Mô tả ngắn</h4>
           <span>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-            mollitia? Dolorum nostrum odio ipsam ullam. Atque, provident rerum,
-            architecto labore tenetur repellat modi officiis dolorem aut, saepe
-            sapiente commodi vel perspiciatis nihil accusamus! Explicabo facere
-            suscipit aliquam odit minima ab, quis expedita natus totam vel a
-            dolorum sed quia hic! Eum, quisquam numquam tempora corrupti obcaecati
-            sit. Molestias impedit iusto cumque voluptatum. Sed vel ut atque
-            eveniet quas cupiditate magni hic voluptatem in expedita, sit animi
-            numquam ipsam ea cum fuga quidem asperiores nulla. Enim perspiciatis
-            molestiae, asperiores doloremque repellendus eveniet assumenda
-            molestias labore error nisi debitis, a sit? Porro reiciendis dolorum
-            quia maiores, sequi hic explicabo vitae odit, facere consectetur
-            doloremque nihil! Dolores ducimus cupiditate fugit molestias.
-            Molestiae enim veniam repellendus cum voluptatum voluptas nisi eveniet
-            vero incidunt. Repudiandae unde quae labore sapiente vitae doloremque
-            corporis praesentium animi, eaque illum, nemo consequuntur?
-            Accusantium rem expedita error provident alias saepe.
+            {{$sanPham->mo_ta}}
           </span>
         </div>
       </section>
@@ -88,74 +81,34 @@
         <h2>Các sản phẩm liên quan</h2>
         <!-- <p>Summer Collection New Mordern Design</p> -->
         <div class="pro-container">
-          <div class="pro">
-            <img src="./img/products/f1.jpg" alt="" />
-            <div class="des">
-              <span>adidas</span>
-              <h5>Cartoon Astronaut T-Shirts</h5>
-              <div class="star">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <h4>$78</h4>
-            </div>
-            <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-          </div>
-  
-          <div class="pro">
-            <img src="./img/products/f2.jpg" alt="" />
-            <div class="des">
-              <span>adidas</span>
-              <h5>Cartoon Astronaut T-Shirts</h5>
-              <div class="star">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <h4>$78</h4>
-            </div>
-            <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-          </div>
-  
-          <div class="pro">
-            <img src="./img/products/f3.jpg" alt="" />
-            <div class="des">
-              <span>adidas</span>
-              <h5>Cartoon Astronaut T-Shirts</h5>
-              <div class="star">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <h4>$78</h4>
-            </div>
-            <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-          </div>
-  
-          <div class="pro">
-            <img src="./img/products/f4.jpg" alt="" />
-            <div class="des">
-              <span>adidas</span>
-              <h5>Cartoon Astronaut T-Shirts</h5>
-              <div class="star">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <h4>$78</h4>
-            </div>
-            <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-          </div>
+            @foreach ($listSanPham as $item)
+                <div class="pro">
+                    <img src="{{ Storage::url($item->image) }}" alt="" />
+                    <div class="des">
+                        <span>{{ $item->brand }}</span>
+                        <h5>{{ $item->name }}</h5>
+                        <div class="star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>{{number_format($item->gia,0,'','.')}}</h4>
+                    </div>
+                    <form action="{{route('cart.add')}}" method="POST">
+                    @csrf
+                      <input type="hidden" name="quantity" id="" value="1">
+                      <input type="hidden" name="product_id" id="" value="{{$item->id}}">
+                      <button><i class="fa fa-shopping-cart cart"></i></button>
+
+                    </form>
+                </div>
+            @endforeach
         </div>
+    </section>
+    
+
       </section>
       <!---- newletter section start -->
       <section id="newsletter" class="section-p1 section-m1">
@@ -172,4 +125,28 @@
         </div>
       </section>
 @endsection
+{{-- <script>
+    $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+    $('.pro-qty').appen('<span class="inc qtybtn">+</span>');
+    $('qtybtn').on('click',function(){
+      var $button = $(this);
+      var $input = $button.parent().find('input');
+      var oldValue = parseFloat($input.val());
+
+      if($button.hasClass('inc')){
+        var newVal = oldValue +1;
+      }else{
+        if(oldValue>1){
+          var newVal = oldValue -1;
+
+        }else{
+          var newVal = 1;
+
+        }
+      }
+ 
+    
+    });
+
+</script> --}}
 
