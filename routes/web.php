@@ -7,6 +7,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChiTietSanPhamController;
+use App\Http\Controllers\CartController;
+
+
 
 
 
@@ -49,9 +53,9 @@ Route::get('/', function () {
         return view('frontend.cart');
     })->name('cart');
 
-    Route::get('/sproduct', function () {
-        return view('frontend.sproduct');
-    })->name('sproduct');
+    // Route::get('/sproduct', function () {
+    //     return view('frontend.sproduct');
+    // })->name('sproduct');
     
 
     Route::get('/login', function () {
@@ -66,7 +70,7 @@ Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    
+
 
     //
 // Route::controller(UserController::class)
@@ -80,6 +84,8 @@ Route::get('/', function () {
 //     ->name('postLogin');
 // Route::post('logout', [UserController::class, 'logout'])
 //     ->name('logout');
+
+
 
 
 
@@ -97,7 +103,16 @@ Route::controller(ProductController::class)
         Route::delete('/{id}/destroy', 'destroy')
         ->name('destroy');
 
-});    
+});  
+
+Route::get('/product/detail/{id}', [ChiTietSanPhamController::class, 'chitietSanPham'])
+->name('product.detail');
+
+Route::get('/list-cart', [CartController::class, 'listCart'])->name('cart.list');
+Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('cart.add');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+
+
 
 
 
