@@ -18,38 +18,22 @@
             </tr>
           </thead>
           <tbody>
+            @foreach ($cart as $key => $item)
             <tr>
-              <td><i class="fa fa-times-circle"></i></td>
-              <td><img src="img/products/f1.jpg" alt="" /></td>
-              <td>Áo thun cá sấu nam</td>
-              <td>120.000 VNĐ</td>
-              <td><input type="number" value="1" /></td>
-              <td>120.000</td>
+              <td><i class="fa fa-times-circle delete-icon"></i></td>
+              <td><img src="{{ Storage::url($item['image']) }}" alt="" /></td>
+                <td><a href="{{ route('product.detail', $key) }}">{{ $item['name'] }}</a></td>
+                <td>{{ number_format($item['gia'], 0, ',', '.') }} đ</td>
+                <td><input type="number" value="{{ $item['so_luong'] }}" class="quantity-input" data-key="{{ $key }}" data-price="{{ $item['gia'] }}" min="1" /></td>
+                <td class="total-price" id="total-price-{{ $key }}">{{ number_format($item['gia'] * $item['so_luong'], 0, ',', '.') }} đ</td>
             </tr>
-            <tr>
-              <td><i class="fa fa-times-circle"></i></td>
-              <td><img src="img/products/f2.jpg" alt="" /></td>
-              <td>Áo thun cá sấu nam</td>
-              <td>120.000 VNĐ</td>
-              <td><input type="number" value="1" /></td>
-              <td>120.000</td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-times-circle"></i></td>
-              <td><img src="img/products/f3.jpg" alt="" /></td>
-              <td>Áo thun cá sấu nam</td>
-              <td>120.000 VNĐ</td>
-              <td><input type="number" value="1" /></td>
-              <td>120.000</td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-times-circle"></i></td>
-              <td><img src="img/products/f4.jpg" alt="" /></td>
-              <td>Áo thun cá sấu nam</td>
-              <td>120.000 VNĐ</td>
-              <td><input type="number" value="1" /></td>
-              <td>120.000</td>
-            </tr>
+            @endforeach
+            
+            
+
+
+
+
           </tbody>
         </table>
       </section>
@@ -68,15 +52,15 @@
           <table>
             <tr>
               <td>Tổng tiền:</td>
-              <td>499.000 VNĐ</td>
+              <td class="subtotal">{{  number_format($subTotal, 0, ',', '.') }}</td>
             </tr>
             <tr>
               <td>Vận chuyển:</td>
-              <td>Miễn phí</td>
+              <td>{{  number_format($shipping, 0, ',', '.') }}</td>
             </tr>
             <tr>
               <td><strong>Tiền thanh toán:</strong></td>
-              <td><strong>499.000 VNĐ</strong></td>
+              <td><strong>{{  number_format($total, 0, ',', '.') }}</strong></td>
             </tr>
           </table>
   
@@ -97,3 +81,54 @@
         </div>
       </section>
     @endsection
+
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const quantityInputs = document.querySelectorAll('.quantity-input');
+  
+          quantityInputs.forEach(input => {
+              input.addEventListener('change', function() {
+                  let quantity = parseInt(this.value);
+                  if (quantity < 1) {
+                      this.value = 1;
+                      quantity = 1;
+                  }
+  
+                  const price = parseFloat(this.getAttribute('data-price'));
+                  const key = this.getAttribute('data-key');
+                  const totalPriceElement = document.getElementById('total-price-' + key);
+                  
+                  const newTotal = quantity * price;
+                  totalPriceElement.textContent = newTotal.toLocaleString('vi-VN') + ' đ';
+              });
+          });
+      });
+
+
+
+    // Chờ đến khi tài liệu được tải hoàn toàn
+    document.addEventListener("DOMContentLoaded", function() {
+        // Tìm tất cả các phần tử có lớp 'delete-icon'
+        var deleteIcons = document.querySelectorAll('.delete-icon');
+
+        // Lặp qua từng phần tử và thêm sự kiện nhấp chuột
+        deleteIcons.forEach(function(icon) {
+            icon.addEventListener('click', function() {
+                // Hiển thị hộp thoại xác nhận
+                var confirmDelete = confirm("Bạn có chắc chắn muốn xóa hàng này?");
+                if (confirmDelete) {
+                    // Tìm hàng cha của biểu tượng 'x' và xóa nó
+                    var row = this.closest('tr');
+                    if (row) {
+                        row.parentNode.removeChild(row);
+                    }
+                }
+            });
+        });
+    });
+
+
+    
+  </script>
+  
