@@ -19,7 +19,9 @@ class DonHang extends Model
         'dang_chuan_bi' => 'Đang chuẩn bị',
         'dang_van_chuyen' => 'Đang vận chuyển',
         'da_giao_hang' => 'Đã giao hàng',
-        'huy_don_hang' => 'Đã hủy'  
+        'giao_hang_thanh_cong' => 'Giao hàng thành công',
+
+        'huy_don_hang' => 'Đã hủy'  ,
     ];
 
     const TRANG_THAI_THANH_TOAN =[
@@ -38,6 +40,9 @@ class DonHang extends Model
     const DANG_VAN_CHUYEN ='dang_van_chuyen';
 
     const DA_GIAO_HANG ='da_giao_hang';
+
+    const GIAO_HANG_THANH_CONG ='giao_hang_thanh_cong';
+
 
     const HUY_DON_HANG ='huy_don_hang';
 
