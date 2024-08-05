@@ -150,29 +150,29 @@
 @section('noidung')
 <div class="order-form-container">
     <div class="order-form">
-        <form action="" method="POST">
+        <form action="{{route('donhangs.store')}}" method="POST">
+            @csrf
             @csrf
             <div class="form-group">
                 <label for="name">Tên người đặt hàng:</label>
-                <input type="text" id="name" name="ten_nguoi_nhan" required>
+                <input type="text" id="so_dien_thoai_nguoi_nhan" name="ten_nguoi_nhan" required>
             </div>
 
             <div class="form-group">
                 <label for="address">Địa chỉ:</label>
-                <input type="text" id="address" name="address" required>
+                <input type="text" id="so_dien_thoai_nguoi_nhan" name="dia_chi_nguoi_nhan" required>
             </div>
 
             <div class="form-group">
                 <label for="phone">Điện thoại:</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="so_dien_thoai_nguoi_nhan" name="so_dien_thoai_nguoi_nhan" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email_nguoi_nhan" name="email_nguoi_nhan" required>
             </div>
 
-        </form>
     </div>
 
     <div class="order-summary">
@@ -198,31 +198,38 @@
                         <tr>
                             <td>
                                 <a href="{{route('product.detail',$key)}}">
-                                    {{$item['name']}} <strong> x
+                                    {{$item['name']}} x
                                         {{$item['so_luong']}}
-                                    </strong>
                                 </a>
+                                <td style="float: right">{{ number_format($item['gia'], 0, ',', '.') }}đ</td>
+
                             </td>
                         </tr>
                     @endforeach
                     <tr>
                         <td class="order-totals-label">Tổng tiền:</td>
-                        <td class="order-totals-value">30.000</td>
+                        <td class="order-totals-value">{{ number_format($subtotal, 0, ',', '.') }}</td>
+                        <input type="hidden" name="tien_hang" value="{{$subtotal}}">
                     </tr>
                     <tr>
                         <td class="order-totals-label">Shipping:</td>
-                        <td class="order-totals-value">788</td>
+                        <td class="order-totals-value">{{ number_format($shipping, 0, ',', '.') }}</td>
+                        <input type="hidden" name="tien_ship" value="{{$shipping}}">
+
                     </tr>
                     <tr>
                         <td class="order-totals-label">Thành tiền:</td>
-                        <td class="order-totals-value">888</td>
+                        <td class="order-totals-value">{{ number_format($total, 0, ',', '.') }}</td>
+                        <input type="hidden" name="tong_tien" value="{{$total}}">
+
                     </tr>
                 </tbody>
             </table>
             <hr>
             <button type="submit" class="btn-submit">Đặt hàng</button>
         </div>
-        
+    </form>
+
     </div>
 </div>
 @endsection
