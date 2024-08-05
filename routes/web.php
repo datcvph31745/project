@@ -6,9 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChiTietSanPhamController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrDerController;
+
+
 
 
 
@@ -111,6 +113,24 @@ Route::get('/product/detail/{id}', [ChiTietSanPhamController::class, 'chitietSan
 Route::get('/list-cart', [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/add-to-cart', [CartController::class, 'addCart'])->name('cart.add');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+
+// don hangf
+
+Route::controller(OrDerController::class)
+    ->name('donhangs.')
+    ->prefix('donhangs/')
+    ->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')
+        ->name('edit');
+        Route::put('/{id}/update', 'update')
+        ->name('update');
+
+
+});  
+
 
 
 
