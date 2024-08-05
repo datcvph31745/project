@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ChiTietDonHang;
+
 
 class DonHang extends Model
 {
     use HasFactory;
+    protected $table = 'don_hang1s';
+
 
     const TRANG_THAI_DON_HANG =[
         'cho_xac_nhan' => 'Chờ xác nhận',
@@ -54,6 +58,14 @@ class DonHang extends Model
         'tien_ship',
         'tong_tien'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function chiTietDonHang(){
+        return $this->hasMany(ChiTienDonHang::class);
+    }
     
 
 }
