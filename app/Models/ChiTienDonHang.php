@@ -12,7 +12,7 @@ class ChiTienDonHang extends Model
 
     protected $fillable =[
         'don_hang_id',
-        'dan_pham_id',
+        'san_pham_id',
         'don_gia',
         'so_luong',
         'thanh_tien',
@@ -24,5 +24,9 @@ class ChiTienDonHang extends Model
 
     public function Product(){
         return $this->belongsTo(Product::class);
+    }
+    public function sanpham()
+    {
+        return $this->belongsTo(Product::class, 'san_pham_id');
     }
 }
