@@ -9,6 +9,7 @@ use App\Http\Controllers\ChiTietSanPhamController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController; // Corrected to OrderController
 use App\Http\Controllers\DanhMucController; // Updated to DanhMucController
+use App\Http\Controllers\DonHangController; // Updated to DanhMucController
 
 /*
 |--------------------------------------------------------------------------
@@ -125,4 +126,14 @@ Route::controller(DanhMucController::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}/update', 'update')->name('update');
+    });
+
+    Route::controller(DonHangController::class)
+    ->name('donhangad.')
+    ->prefix('donhangad/')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/show{id}', 'show')->name('show');
+        Route::put('/{id}/update', 'update')->name('update');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
