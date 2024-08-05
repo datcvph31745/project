@@ -3,89 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Order;
 
-use DataTables;
-
-class OrderController extends Controller
+class OrDerController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        if ($request->ajax()) {
-            $orders = Order::latest()->get();
-
-            if ($request->filled('start_date') && $request->filled('end_date')) {
-                $orders = $orders->whereBetween('created_at', [$request->start_date, $request->end_date]);
-            }
-            return DataTables::of($orders)
-                ->addIndexColumn()
-                ->addColumn('action', function ($user) {
-                    $btn = '
-                        <a href="#" 
-                        class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        
-                        <a href="#" 
-                        class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                        
-                        <a href="#" 
-                        class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    ';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-
-        return view('orders.index');
+        //
     }
 
-    // public function add()
-    // {
-    //     $users = User::get();
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+        return view('donhang.create');
 
-    //     return view('users.form', ['category' => $users]);
-    // }
+    }
 
-    // public function save(Request $request)
-    // {
-    //     $data = [
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => $request->password,
-    //         'level' => $request->level
-    //     ];
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
-    //     User::create($data);
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
-    //     return redirect()->route('users');
-    // }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
 
-    // public function edit($id)
-    // {
-    //     $user = User::find($id);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-    //     return view('users.form', ['user' => $user]);
-    // }
-
-    // public function update($id, Request $request)
-    // {
-    //     $data = [
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => $request->password,
-    //         'level' => $request->level
-    //     ];
-
-    //     User::find($id)->update($data);
-
-    //     return redirect()->route('users');
-    // }
-
-    // public function delete($id)
-    // {
-    //     User::find($id)->delete();
-
-    //     return redirect()->route('users');
-    // }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
