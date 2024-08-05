@@ -57,6 +57,7 @@ class OrDerController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request ->all());
         DB::beginTransaction();
     
         try {
@@ -73,7 +74,7 @@ class OrDerController extends Controller
             
                 $donHang->chiTietDonHang()->create([
                     'don_hang_id' => $donHangId,
-                    'san_pham_id' => $key,
+                    'product_id' => $key,
                     'don_gia' => $item['gia'],
                     'so_luong' => $item['so_luong'],
                     'thanh_tien' => $thanhTien
