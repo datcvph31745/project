@@ -112,14 +112,17 @@
               <td class="sub-shipping">{{ number_format($shipping, 0, ',', '.') }} đ</td>
             </tr>
             <tr>
-              <td><strong>Tiền thanh toán:</strong></td>
+                              <td><strong>Tiền thanh toán:</strong></td>
+              
               <td class="sub-total"><strong>{{ number_format($total, 0, ',', '.') }} đ</strong></td>
             </tr>
           </table>
 
 
+          <a href="{{route('donhangs.create')}}">
 
           <button class="normal">Tiến hành thanh toán</button>
+       </a>
         </div>
       </section>
       <section id="newsletter" class="section-p1 section-m1">
