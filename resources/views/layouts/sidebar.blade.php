@@ -76,11 +76,17 @@
                     </nav>
                 </div>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsehoadon" aria-expanded="false" aria-controls="collapsehoadon">
+
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseshoadon" aria-expanded="false" aria-controls="collapsesanpham">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Hóa đơn
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
+                <div class="collapse" id="collapseshoadon" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ route('donhangad.index') }}">Tất cả hóa đơn</a>
+                    </nav>
+                </div>
 
             </div>
         </div>
