@@ -28,23 +28,30 @@
             <td>{{ number_format($item->tong_tien, 0, ',', '.') }} D</td>
 
             <td>
-                <form action="{{ route('donhangad.update', $item->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <select name="trang_thai_don_hang" id="select-{{ $item->id }}" onchange="confirmSubmit(this, '{{ $item->trang_thai_don_hang }}')">
-                        @foreach ($trangThaiDonHang as $key => $value)
-                            <option value="{{ $key }}" 
-                                {{ $key == $item->trang_thai_don_hang ? 'selected' : '' }}
-                                {{ $key == $type_huy_don_hang ? 'disabled' : '' }}>
-                                {{ $value }}
-                            </option>
-                        @endforeach
-                    </select>
-                </form>
+<form action="{{ route('donhangad.update', $item->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <select name="trang_thai_don_hang" id="select-{{ $item->id }}" onchange="confirmSubmit(this, '{{ $item->trang_thai_don_hang }}')">
+        @foreach ($trangThaiDonHang as $key => $value)
+            @php
+                // Determine if the option should be disabled
+                $disabled = ($item->trang_thai_don_hang === $type_giao_hang_thanh_cong || $item->trang_thai_don_hang === $type_huy_don_hang) && $key !== $item->trang_thai_don_hang ? 'disabled' : '';
+            @endphp
+
+            <option value="{{ $key }}" 
+                {{ $key == $item->trang_thai_don_hang ? 'selected' : '' }}
+                {{ $disabled }}>
+                {{ $value }}
+            </option>
+        @endforeach
+    </select>
+</form>
+
+                
             </td>
             <td>
                 <a href="{{ route('donhangad.show', $item->id) }}" class="btn btn-info btn-sm">Xem</a>
-                @if ($item ->trang_thai_don_hang === $type_huy_don_hang)
+                @if ($item ->trang_thai_don_hang === $type_huy_don_hang || $item ->trang_thai_don_hang === $type_giao_hang_thanh_cong )
                 <form action="{{ route('donhangad.destroy', $item->id) }}"
                     method="POST" class="d-inline"
                     onsubmit="return confirm('Bạn có đồng ý xóa không?')">
