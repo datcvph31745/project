@@ -33,17 +33,14 @@
                 <th>Địa chỉ người nhận:</th>
                 <td>{{ $donHang->dia_chi_nguoi_nhan }}</td>
             </tr>
-            <tr>
-                <th>Ghi chú:</th>
-                <td>{{ $donHang->ghi_chu }}</td>
-            </tr>
+
             <tr>
                 <th>Trạng thái đơn hàng:</th>
-                <td>{{ $trangThaiDonHang[$donHang->trang_thai_don_hang] ?? 'Không xác định' }}</td>
+                <td>{{ $trangThaiDonHang[$donHang->trang_thai_don_hang] ?? 'Chờ xác nhận' }}</td>
             </tr>
             <tr>
                 <th>Trạng thái thanh toán:</th>
-                <td>{{ $trangThaiThanhToan[$donHang->trang_thai_thanh_toan] ?? 'Không xác định' }}</td>
+                <td>{{ $trangThaiThanhToan[$donHang->trang_thai_thanh_toan] ?? 'CHỜ THANH TOÁN' }}</td>
             </tr>
             <tr>
                 <th>Tiền hàng:</th>
@@ -74,7 +71,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($donHang->chiTienDonHang as $item)
+                @foreach($donHang->chiTietDonHang as $item)
                     @php
                         $sanPham = $item->Product;
                     @endphp
@@ -93,39 +90,6 @@
         </table>
     </div>
 @endsection
-
-@section('styles')
-<style>
-    .order-details, .product-details {
-        margin: 20px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
-    .order-details h2, .product-details h3 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .order-table, .product-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .order-table th, .order-table td, .product-table th, .product-table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    .order-table th, .product-table th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
-    .alert {
-        margin-bottom: 20px;
-    }
-</style>
-@endsection
-
 
 @section('styles')
 <style>
