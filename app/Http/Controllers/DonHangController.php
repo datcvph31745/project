@@ -16,8 +16,10 @@ class DonHangController extends Controller
         $listDonHang = DonHang::query()->orderByDesc('id')->get();
         $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
         $type_huy_don_hang = DonHang::HUY_DON_HANG;
+        $type_giao_hang_thanh_cong = DonHang::GIAO_HANG_THANH_CONG;
+
     
-        return view('donhangad.index', compact('listDonHang', 'trangThaiDonHang', 'type_huy_don_hang'));
+        return view('donhangad.index', compact('listDonHang', 'trangThaiDonHang', 'type_huy_don_hang','type_giao_hang_thanh_cong'));
     }
     
 
