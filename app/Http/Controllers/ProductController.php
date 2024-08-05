@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Danhmuc;
 use Illuminate\Support\Facades\Storage;
 
