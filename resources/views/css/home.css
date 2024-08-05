@@ -1,0 +1,238 @@
+.banner{
+    display: flex;
+    
+}
+.menu-container{
+  text-decoration: none;
+}
+img {
+    flex: 1;
+    margin: 5px; /* Khoảng cách giữa các ảnh */
+    padding: 5px;
+    max-width: 100%;
+    height: auto;
+    margin: 8px;
+  }
+h1{
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: 'Oswald';
+    width: 100%;
+    font-size: 5.85vw;
+    height: auto!important;
+    overflow: hidden;
+    text-transform: uppercase;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-fill-color: hsl(0deg 0% 100%);
+    /* animation: slide 15s linear infinite;
+    animation-timing-function: linear; */
+}
+@keyframes slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  .menu-container {
+    position: relative;
+    z-index: 2; /* Đặt độ sâu của menu là 2 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px; /* Khoảng cách giữa nội dung và biên của header */
+    z-index: 1000;
+    background-color: white;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    height: 50px;
+  }
+  
+  .menu li {
+    margin-right: 10px;
+    padding-top:20px;
+      padding-right: 13px;
+      font-family: 'Quicksand', sans-serif;
+      
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color:black;
+  font-size: 14px;    
+  
+  }
+  
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+    /* background-image: url('https://theme.hstatic.net/1000306633/1000891824/14/slideshow_1.jpg?v=587');
+      background-attachment: fixed; */
+  }
+   .img{
+     height: 50px;
+      padding-right: 20px;
+  }
+  .a-right{
+    padding-left: 150px;
+    font-size: 14px;
+    display: flex;
+  }
+  .menu-container {
+    position: relative;
+    z-index: 2; /* Đặt độ sâu của menu là 2 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px; /* Khoảng cách giữa nội dung và biên của header */
+    z-index: 1000;
+    background-color: white;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    height: 50px;
+  }
+  
+  .menu li {
+    margin-right: 10px;
+    padding-top:20px;
+      padding-right: 13px;
+      font-family: 'Quicksand', sans-serif;
+      
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color:black;
+  font-size: 14px;    
+  
+  }
+  
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+    /* background-image: url('https://theme.hstatic.net/1000306633/1000891824/14/slideshow_1.jpg?v=587');
+      background-attachment: fixed; */
+  }
+   .img{
+     height: 50px;
+      padding-right: 20px;
+  }
+  .a-right{
+    padding-left: 150px;
+    font-size: 14px;
+    display: flex;
+  }
+  .home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+margin-top: 100px;
+font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #212b36
+  }
+  
+  .card {
+
+    width: 23%; 
+    padding: 10px;
+    box-sizing: border-box; 
+    border: none;
+    margin: 5px; 
+    text-align: center; /* Căn giữa nội dung trong thẻ */
+  }
+  .name h2{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #212b36;
+    margin: 0 0 5px;
+    font-size: 14px;
+    padding: 0;
+    border: 0;
+  }
+  .button {
+    display: flex;
+    justify-content:center;
+  }
+  
+  .button-link {
+    opacity: 0;
+    flex: 1;
+    display: inline-block;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    /* transition: opacity 1s; */
+    cursor: pointer;
+    transition: transform 0.5s;
+  transform: translateY(8px);
+  }
+  
+  .primary-button {
+    background-color:black;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .secondary-button {
+    background-color:black;
+    color: #fff;
+    padding: 10px 0px;
+  }
+  
+  .button-link:hover {
+    background-color: black;
+    opacity: 1;
+  }
+  .card:hover .button-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nd {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* căn giữa các hàng */
+}
+
+.card {
+    width: 23%; /* 23% để có 4 sản phẩm trong 1 hàng, còn lại là margin và padding */
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.size h2 a{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Oswald' !important;
+    font-weight: bold;
+    color: #212b36;
+    text-decoration: none;
+
+ } 
