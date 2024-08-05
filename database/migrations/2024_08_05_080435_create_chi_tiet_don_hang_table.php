@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\DonHang;   // Ensure you have the correct namespace for DonHang
+use App\Models\Product; 
 
 return new class extends Migration
 {
@@ -14,8 +16,7 @@ return new class extends Migration
         Schema::create('chi_tiet_don_hang', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignIdFor(DonHang::class)->constrained();
-            $table->foreignIdFor(Product::class)->constrained();
+
 
             $table->double('don_gia');
             $table->unsignedInteger('so_luong');
