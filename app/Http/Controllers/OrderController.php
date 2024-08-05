@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Models\DonHang;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderComfirm;
 
@@ -19,6 +22,8 @@ class OrDerController extends Controller
     public function index()
     {
         //
+        $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
+        return view('donhang.index');
     }
 
     /**
@@ -52,34 +57,40 @@ class OrDerController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'ten_nguoi_nhan' => 'required|string|max:255',
-            'dia_chi_nguoi_nhan' => 'required|string|max:255',
-            'so_dien_thoai_nguoi_nhan' => 'required|string|max:20',
-            'email_nguoi_nhan' => 'required|email|max:255',
-            'tien_hang' => 'required|numeric',
-            'tien_ship' => 'required|numeric',
-            'tong_tien' => 'required|numeric',
-        ]);
-    
-        // Generate a unique order number
-        $orderNumber = 'DH-' . strtoupper(Str::random(8));
+        DB::beginTransaction();
     
         try {
-            // Create a new order
-            $donHang = DonHang::create(array_merge($validated, ['ma_don_hang' => $orderNumber]));
+            $params = $request->except('_token');
+            $params['ma_don_hang'] = $this->generateUniqueOrderCode();
     
-            // Gửi email khi đặt hàng thành công
-            Mail::to($donHang->email_nguoi_nhan)->queue(new OrderComfirm($donHang));
+            $donHang = DonHang::create($params);
+            $donHangId = $donHang->id;
     
-            return redirect()->route('donhangs.index')->with('success', 'Đơn hàng đã được đặt với mã số: ' . $orderNumber);
-        } catch (QueryException $e) {
-            // Log the error if needed
-            \Log::error('Order creation failed: ' . $e->getMessage());
+            $carts = session()->get('cart', []);
+            foreach ($carts as $key => $item) {
+
+                $thanhTien = $item['gia'] * $item['so_luong'];
+            
+                $donHang->chiTietDonHang()->create([
+                    'don_hang_id' => $donHangId,
+                    'san_pham_id' => $key,
+                    'don_gia' => $item['gia'],
+                    'so_luong' => $item['so_luong'],
+                    'thanh_tien' => $thanhTien
+                ]);
+            }
+            
     
-            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình đặt hàng. Vui lòng thử lại sau.');
+            DB::commit();
+    
+            return redirect()->route('cart.list')->with('success', 'Tạo đơn hàng thành công!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('cart.list')->with('error', 'Có lỗi khi tạo đơn hàng. Vui lòng thử lại sau!');
         }
     }
+    
+
     
 
     /**
@@ -88,6 +99,11 @@ class OrDerController extends Controller
     public function show(string $id)
     {
         //
+        $donHang = DonHang::query()->findOrFail($id);
+        $trangThaiDonHang = DonHang::TRANG_THAI_DON_HANG;
+        $trangThaiThanhToan = DonHang::TRANG_THAI_THANH_TOAN;
+        return view('donhang.show',compact('donHang','trangThaiDonHang','trangThaiThanhToan'));
+
     }
 
     /**
