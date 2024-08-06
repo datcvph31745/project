@@ -11,40 +11,7 @@
         <div class="single-product-image">
           <img src="{{ Storage::url($sanPham->image) }}" alt="" width="100%" id="mainImg" />
   
-          <div class="small-img-group">
-            <div class="small-img-col">
-              <img
-                src="{{ asset('img/products/f1.jpg') }}"
-                class="small-img"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="small-img-col">
-              <img
-                src="{{ asset('img/products/f3.jpg') }}"
-                class="small-img"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="small-img-col">
-              <img
-                src="{{ asset('img/products/f4.jpg') }}"
-                class="small-img"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="small-img-col">
-              <img
-                src="{{ asset('img/products/f2.jpg') }}"
-                class="small-img"
-                width="100%"
-                alt=""
-              />
-            </div>
-          </div>
+          
         </div>
   
         <div class="single-product-details">
@@ -77,13 +44,16 @@
       </section>
   
       <!---- sản phẩm liên quan -------->
+      <h2 style="text-align: center">Các sản phẩm liên quan</h2>
+
       <section id="product1" class="section-p1">
-        <h2>Các sản phẩm liên quan</h2>
         <!-- <p>Summer Collection New Mordern Design</p> -->
         <div class="pro-container">
             @foreach ($listSanPham as $item)
                 <div class="pro">
+                  <a href="{{ route('product.detail', $item->id) }}"> 
                     <img src="{{ Storage::url($item->image) }}" alt="" />
+                  </a>
                     <div class="des">
                         <span>{{ $item->brand }}</span>
                         <h5>{{ $item->name }}</h5>
