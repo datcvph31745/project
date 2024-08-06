@@ -13,8 +13,8 @@
             <a href="#" id="close"><i class="fas fa-times"></i></a>
         </ul>
     </div>
-    <div id="mobile">
-        <a href="{{route('cart')}}"><i class="fas fa-shopping-bag"></i></a>
+    {{-- <div id="mobile">
+        <a href="{{route('cart.list')}}"><i class="fas fa-shopping-bag"></i></a>
         <i id="bar" class="fas fa-outdent"></i>
-    </div>
+    </div> --}}
 </section>
