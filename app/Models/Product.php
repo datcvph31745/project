@@ -56,7 +56,7 @@ class Product extends Model
         return $res;
 
 
-    }
+    } 
 
 
 }
