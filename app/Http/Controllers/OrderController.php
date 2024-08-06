@@ -46,7 +46,7 @@ class OrDerController extends Controller
             return view('donhang.create',compact('cart','subtotal','total','shipping'));
 
         }
-        return redirect()->route('list');
+        return redirect()->route('cart.list');
 
         
 
