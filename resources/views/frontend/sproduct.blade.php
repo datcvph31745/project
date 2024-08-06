@@ -46,20 +46,14 @@
           <h4>Số lượng: {{$sanPham->so_luong}}</h4>
 
           
-          {{-- <select name="" id="">
-            <option value="">Select Size</option>
-            <option value="">XXL</option>
-            <option value="">XL</option>
-            <option value="">Medium</option>
-            <option value="">Small</option>
-          </select> --}}
+
 
           <form action="{{route('cart.add')}}" method="post">
             @csrf
             <div class="pro-qty">
               <input type="number" value="1" name="quantity" min="1" max= "{{$sanPham->so_luong}}"id="quantyityInput"  />
               <input type="hidden" name="product_id" value="{{$sanPham->id}}">
-              <button type="submit">Thêm vào giỏ hàng</button>
+              <button type="submit" onclick="confirmAddToCart(event)">Thêm vào giỏ hàng</button>
   
             </div>
           </form>
@@ -125,28 +119,12 @@
         </div>
       </section>
 @endsection
-{{-- <script>
-    $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
-    $('.pro-qty').appen('<span class="inc qtybtn">+</span>');
-    $('qtybtn').on('click',function(){
-      var $button = $(this);
-      var $input = $button.parent().find('input');
-      var oldValue = parseFloat($input.val());
 
-      if($button.hasClass('inc')){
-        var newVal = oldValue +1;
-      }else{
-        if(oldValue>1){
-          var newVal = oldValue -1;
-
-        }else{
-          var newVal = 1;
-
-        }
+<script>
+  function confirmAddToCart(event) {
+      event.preventDefault(); // Ngăn chặn form gửi đi ngay lập tức
+      if (confirm("Bạn có chắc chắn muốn thêm sản phẩm này vào giỏ hàng không?")) {
+          event.target.form.submit();
       }
- 
-    
-    });
-
-</script> --}}
-
+  }
+</script>
