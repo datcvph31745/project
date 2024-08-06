@@ -233,3 +233,18 @@
     </div>
 </div>
 @endsection
+<script>
+    function confirmOrder(event) {
+        event.preventDefault(); // Ngăn chặn form gửi đi ngay lập tức
+        if (confirm("Bạn có chắc chắn muốn đặt hàng không?")) {
+            // Nếu người dùng chọn "OK", hiện thông báo và gửi form
+            alert("Bạn đã đặt hàng thành công!");
+            event.target.form.submit();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitButton = document.querySelector('.btn-submit');
+        submitButton.addEventListener('click', confirmOrder);
+    });
+</script>
