@@ -28,70 +28,53 @@ use App\Http\Controllers\HomeController;
 */
 
 // Frontend Routes
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
+// Route::get('/', function () {
+//     return view('frontend.index');
+// })->name('home');
 
-Route::get('/shop', function () {
-    return view('frontend.shop');
-})->name('shop');
+// Route::get('/shop', function () {
+//     return view('frontend.shop');
+// })->name('shop');
 
-Route::get('/blog', function () {
-    return view('frontend.blog');
-})->name('blog');
+// Route::get('/blog', function () {
+//     return view('frontend.blog');
+// })->name('blog');
 
-Route::get('/about', function () {
-    return view('frontend.about');
-})->name('about');
+// Route::get('/about', function () {
+//     return view('frontend.about');
+// })->name('about');
 
-Route::get('/contact', function () {
-    return view('frontend.contact');
-})->name('contact');
+// Route::get('/contact', function () {
+//     return view('frontend.contact');
+// })->name('contact');
 
-Route::get('/cart', function () {
-    return view('frontend.cart');
-})->name('cart');
+// Route::get('/cart', function () {
+//     return view('frontend.cart');
+// })->name('cart');
 
-Route::get('/sproduct', function () {
-    return view('frontend.sproduct');
-})->name('sproduct');
+// Route::get('/sproduct', function () {
+//     return view('frontend.sproduct');
+// })->name('sproduct');
 
-// Authentication Routes
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// // Authentication Routes
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('register');
 
 
-Route::controller(ProductController::class)
-    ->name('products.')
-    ->prefix('products/')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::put('/{id}/update', 'update')->name('update');
-        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
-    });
+
+
+
 
 
     Route::get('/product/detail/{id}', [ChiTietSanPhamController::class, 'chitietSanPham'])
     ->name('product.detail');
 
-// Route::get('/products', [DanhSachSanPhamController::class, 'danhSachSanPham'])
-//     ->name('index');
 
-
-
-//
 Route::controller(CartController::class)
     ->name('cart.')
     ->prefix('cart/')
@@ -115,17 +98,7 @@ Route::controller(OrderController::class)
 //
 
 // Routes for DanhMucController
-Route::controller(DanhMucController::class)
-    ->name('danhmucs.')
-    ->prefix('danhmucs/')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::put('/{id}/update', 'update')->name('update');
-        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
-    });
+
 
 
     Route::controller(OrderController::class)
@@ -140,15 +113,7 @@ Route::controller(DanhMucController::class)
     });
 
 
-    Route::controller(DonHangController::class)
-    ->name('donhangad.')
-    ->prefix('donhangad/')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/show{id}', 'show')->name('show');
-        Route::put('/{id}/update', 'update')->name('update');
-        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
-    });
+
 
 
     Route::controller(HomeController::class)
@@ -163,3 +128,58 @@ Route::controller(DanhMucController::class)
         Route::get('/about', 'about')->name('about');
         Route::get('/contact', 'contact')->name('contact'); 
     });
+
+    //đang nhap
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('register', 'register')->name('register');
+        Route::post('register', 'registerSave')->name('register.save');
+    
+        Route::get('login', 'login')->name('login');
+        Route::post('login', 'loginAction')->name('login.action');
+    
+        Route::get('logout', 'logout')->middleware('auth')->name('logout');
+    });
+
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
+
+        Route::prefix('products')
+            ->name('products.')
+            ->controller(ProductController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/{id}/edit', 'edit')->name('edit');
+                Route::put('/{id}/update', 'update')->name('update');
+                Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+            });
+
+            Route::controller(DonHangController::class)
+            ->name('donhangad.')
+            ->prefix('donhangad/')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/show{id}', 'show')->name('show');
+                Route::put('/{id}/update', 'update')->name('update');
+                Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+            });
+
+            
+            Route::controller(DanhMucController::class)
+            ->name('danhmucs.')
+            ->prefix('danhmucs/')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/{id}/edit', 'edit')->name('edit');
+                Route::put('/{id}/update', 'update')->name('update');
+                Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+    });
+    });
+    
