@@ -42,8 +42,7 @@
 
     <!---- feature product section -------->
     <section id="product1" class="section-p1">
-        <h2>Featured Products</h2>
-        <p>Summer Collection New Mordern Design</p>
+
         <div class="pro-container">
             <div class="pro">
                 <img src="{{ asset('img/products/f1.jpg') }}" alt="">
@@ -193,8 +192,7 @@
 
      <!---- feature product section -------->
      <section id="product1" class="section-p1">
-        <h2>New Arrivals</h2>
-        <p>Summer Collection New Mordern Design</p>
+
         <div class="pro-container">
             <div class="pro">
                 <img src="{{ asset('img/products/n1.jpg') }}" alt="">
