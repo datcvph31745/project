@@ -193,7 +193,41 @@ body {
 
 #product1 {
   text-align: center;
+  display: flex;
 }
+
+#product1 .danhmuc ul{
+  list-style: none;
+}
+
+#product1 .danhmuc ul li{
+  padding: 10px 1px;
+}
+
+#product1 .danhmuc ul li:hover{
+background-color:orange ;
+}
+#product1 .danhmuc ul li a {
+  text-decoration: none;
+  padding: 15px;
+}
+.danhmuc{
+  text-align: left;
+  margin-right: 40px;
+  border: 1px dotted cadetblue;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.danhmuc .title{
+  color: white;
+  background-color: blue;
+  padding: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+
+}
+
 
 #product1 .pro-container {
   display: grid;
@@ -201,6 +235,7 @@ body {
   padding-top: 20px;
   grid-gap: 40px;
 }
+
 
 #product1 .pro {
   width: 100%;
