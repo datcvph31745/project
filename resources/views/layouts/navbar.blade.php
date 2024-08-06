@@ -21,7 +21,9 @@
     
                     <li><hr class="dropdown-divider" /></li>    
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="{{route('logout')}}">LogOut</a></li>
+
                         <li><hr class="dropdown-divider" /></li>
                         {{-- <li><a class="dropdown-item" href={{ route('logout')}}>Logout</a></li> --}}
                     </ul>
