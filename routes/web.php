@@ -10,6 +10,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController; // Corrected to OrderController
 use App\Http\Controllers\DanhMucController; // Updated to DanhMucController
 use App\Http\Controllers\DonHangController; // Updated to DanhMucController
+use App\Http\Controllers\DanhSachSanPhamController;
+use App\Http\Controllers\HomeController;
+
+// Updated to DanhMucController
+
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +69,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-// Routes for ProductController
+
 Route::controller(ProductController::class)
     ->name('products.')
     ->prefix('products/')
@@ -77,11 +82,16 @@ Route::controller(ProductController::class)
         Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
-// Product Detail Route
-Route::get('/product/detail/{id}', [ChiTietSanPhamController::class, 'chitietSanPham'])
+
+    Route::get('/product/detail/{id}', [ChiTietSanPhamController::class, 'chitietSanPham'])
     ->name('product.detail');
 
-// Routes for CartController
+// Route::get('/products', [DanhSachSanPhamController::class, 'danhSachSanPham'])
+//     ->name('index');
+
+
+
+//
 Route::controller(CartController::class)
     ->name('cart.')
     ->prefix('cart/')
@@ -90,8 +100,7 @@ Route::controller(CartController::class)
         Route::post('/add', 'addCart')->name('add');
         Route::post('/update', 'updateCart')->name('update');
     });
-
-// Routes for OrderController
+//
 Route::controller(OrderController::class)
     ->name('orders.')
     ->prefix('orders/')
@@ -102,6 +111,8 @@ Route::controller(OrderController::class)
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}/update', 'update')->name('update');
     });
+
+//
 
 // Routes for DanhMucController
 Route::controller(DanhMucController::class)
@@ -128,6 +139,7 @@ Route::controller(DanhMucController::class)
         Route::put('/{id}/update', 'update')->name('update');
     });
 
+
     Route::controller(DonHangController::class)
     ->name('donhangad.')
     ->prefix('donhangad/')
@@ -136,4 +148,18 @@ Route::controller(DanhMucController::class)
         Route::get('/show{id}', 'show')->name('show');
         Route::put('/{id}/update', 'update')->name('update');
         Route::delete('/{id}/destroy', 'destroy')->name('destroy');
+    });
+
+
+    Route::controller(HomeController::class)
+    ->group(function () {
+        Route::get('/', 'home')->name('home');
+        Route::get('/shop', 'shop')->name('shop');
+        //hient thi theo danh muc
+        Route::get('/danh-muc/{slug}', [HomeController::class, 'sanphamtheodanhmuc'])->name('sanphamtheodanhmuc');
+
+        Route::get('/san-pham/{slug}', [HomeController::class, 'chitietsanpham'])->name('chitietsanpham');
+        Route::get('/blog', 'blog')->name('blog'); 
+        Route::get('/about', 'about')->name('about');
+        Route::get('/contact', 'contact')->name('contact'); 
     });
