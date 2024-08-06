@@ -80,7 +80,7 @@ class ProductController extends Controller
             } else {
                 $data['image'] = $imageOld;
             }
-            $res = $objPro->updateDataProduct($data, $id);
+            $res = $objPro->upadateDataProduct($data, $id);
             if ($res) {
                 return redirect()->back()->with('success', 'Sản phẩm chỉnh sửa thành công!');
             } else {
