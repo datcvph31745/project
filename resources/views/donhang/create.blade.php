@@ -178,12 +178,7 @@
     <div class="order-summary">
         <h3>Chi tiết đơn hàng</h3>
         <div class="order-items">
-            <!-- Render danh sách sản phẩm và thông tin shipping -->
-            {{-- @foreach ($orderItems as $item)
-                <div class="order-item">
-                    <p>{{ $item->name }} - {{ $item->quantity }} x {{ $item->price }}</p>
-                </div>
-            @endforeach --}}
+
         </div>
         <div class="order-totals">
             <table class="order-totals-table">
