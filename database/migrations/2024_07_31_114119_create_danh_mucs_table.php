@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +10,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('danh_mucs', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('danh_mucs', function (Blueprint $table) {
+            $table->string('slug')->unique()->after('name'); // Add slug column
         });
     }
 
@@ -23,6 +20,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('danh_mucs');
+        Schema::table('danh_mucs', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
     }
 };
