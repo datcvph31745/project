@@ -31,8 +31,12 @@
               </div>
               <h4>{{ number_format($product->gia, 0, ',', '.') }}</h4>
           </div>
-          <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-      </div>
+          <form action="{{ route('cart.add') }}" method="POST">
+            @csrf
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="product_id" value="{{ $item->id }}">
+            <button  ><i class="fa fa-shopping-cart cart"></i></button>
+          </form>      </div>
   @endforeach
   
     </div>
