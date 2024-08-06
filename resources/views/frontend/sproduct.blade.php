@@ -91,8 +91,8 @@
                     @csrf
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="product_id" value="{{ $item->id }}">
-                    <button><i class="fa fa-shopping-cart cart"></i></button>
-                </form>
+                    <button  ><i class="fa fa-shopping-cart cart"></i></button>
+                  </form>
             </div>
             @endforeach
         </div>
@@ -127,4 +127,7 @@
           event.target.form.submit();
       }
   }
+
+
 </script>
+
