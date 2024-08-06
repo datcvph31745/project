@@ -28,7 +28,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'level' => 'Admin'
+            'level' => 'User'
         ]);
 
         return redirect()->route('login');
@@ -45,17 +45,28 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ])->validate();
-
+    
         if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed')
             ]);
         }
-
+    
         $request->session()->regenerate();
-
-        return redirect()->route('dashboard');
+    
+        $user = Auth::user();
+        
+        // Kiểm tra thuộc tính level và giá trị admin
+        if ($user->level === 'Admin') {
+            return redirect()->route('dashboard');
+        }
+    
+        // Nếu không phải admin, đăng xuất và thông báo lỗi
+        Auth::logout();
+        return redirect()->back()->withErrors(['email' => 'Bạn không có quyền truy cập vào trang này.']);
     }
+    
+    
 
     public function logout(Request $request)
     {
