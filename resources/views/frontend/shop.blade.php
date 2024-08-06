@@ -16,24 +16,25 @@
         </ul>
     </div>
     <div class="pro-container">
-        @foreach ($sanpham as $product)
-            <div class="pro">
-                <a href="{{ route('product.detail', $product->id) }}">
-                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" />
-                </a>
-                <div class="des">
-                    <span>{{ $product->brand }}</span>
-                    <h5>{{ $product->name }}</h5>
-                    <div class="star">
-                        @for ($i = 0; $i < 5; $i++)
-                            <i class="fas fa-star{{ $product->rating > $i ? '' : '-o' }}"></i>
-                        @endfor
-                    </div>
-                    <h4>{{ number_format($product->gia, 0, ',', '.') }}</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-        @endforeach
+      @foreach ($sanpham->take(8) as $product)
+      <div class="pro">
+          <a href="{{ route('product.detail', $product->id) }}">
+              <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" />
+          </a>
+          <div class="des">
+              <span>{{ $product->brand }}</span>
+              <h5>{{ $product->name }}</h5>
+              <div class="star">
+                  @for ($i = 0; $i < 5; $i++)
+                      <i class="fas fa-star{{ $product->rating > $i ? '' : '-o' }}"></i>
+                  @endfor
+              </div>
+              <h4>{{ number_format($product->gia, 0, ',', '.') }}</h4>
+          </div>
+          <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+      </div>
+  @endforeach
+  
     </div>
 </section>
 
