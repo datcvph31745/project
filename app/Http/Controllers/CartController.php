@@ -37,7 +37,6 @@ class CartController extends Controller
         $sanpham = Product::query()->findOrFail($productId);
 
         //khởi tạo 1 mảng chứa thông tin giỏ hàng trên sesion
-
         $cart = session()->get('cart',[]);
 
         if(isset($cart[$productId])){
